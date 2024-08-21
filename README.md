@@ -1,0 +1,1 @@
+# SwissQR-Wallet-web

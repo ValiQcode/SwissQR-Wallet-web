@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const qrInput = document.getElementById('qr-input');
     const generateQrBtn = document.getElementById('generate-qr');
@@ -15,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const qrItem = document.createElement('div');
             qrItem.classList.add('qr-item');
 
-            const canvas = document.createElement('canvas');
-            QRCode.toCanvas(canvas, data, { width: 100, height: 100 });
+            const canvas = document.createElement('div'); // Create a div instead of a canvas
+            new QRCode(canvas, { text: data, width: 100, height: 100 }); // Use QRCode constructor
 
             qrItem.appendChild(canvas);
             qrCodesContainer.appendChild(qrItem);
@@ -35,16 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
     generateQrBtn.addEventListener('click', () => {
         const data = qrInput.value.trim();
         if (data) {
-            // Clear the previous QR code
-            qrCanvas.innerHTML = '';
-            
-            // Generate the QR code
-            const qrCode = new QRCode(qrCanvas, {
+            qrCanvas.innerHTML = ""; // Clear the previous QR code
+
+            new QRCode(qrCanvas, { // Create a new QRCode object
                 text: data,
                 width: 200,
                 height: 200,
             });
-            
+
             saveQRCode(data);
             qrInput.value = '';
         }

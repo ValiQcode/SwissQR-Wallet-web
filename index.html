@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Wallet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Wallet</h1>
+
+        <div class="qr-form">
+            <input type="text" id="qr-input" placeholder="Enter text to generate QR code">
+            <button id="generate-qr">Generate QR Code</button>
+        </div>
+
+        <div class="qr-display">
+            <canvas id="qr-canvas"></canvas>
+        </div>
+
+        <div class="wallet">
+            <h2>Your QR Codes</h2>
+            <div id="qr-codes"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -35,7 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     generateQrBtn.addEventListener('click', () => {
         const data = qrInput.value.trim();
         if (data) {
-            QRCode.toCanvas(qrCanvas, data, { width: 200, height: 200 });
+            const qrCanvas = document.getElementById('qr-canvas');
+            qrCanvas.innerHTML = ""; // Clear the previous QR code
+            new QRCode(qrCanvas, {
+                text: data,
+                width: 200,
+                height: 200,
+            });
             saveQRCode(data);
             qrInput.value = '';
         }

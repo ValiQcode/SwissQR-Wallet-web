@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('qr-modal');
     const modalCanvas = document.getElementById('modal-canvas');
     const closeModalBtn = document.getElementById('close-modal');
+    const shareButton = document.getElementById('share-button');
 
     // Load saved QR codes from Local Storage
     const loadQRCodes = () => {
@@ -47,6 +48,38 @@ document.addEventListener('DOMContentLoaded', () => {
             width: qrSize,
             height: qrSize,
         });
+
+        // Set up the share button
+        shareButton.onclick = () => shareQRCode(data);
+    };
+
+    // Share the QR code
+    const shareQRCode = (data) => {
+        const qrCodeDiv = document.createElement('div');
+        const qrCode = new QRCode(qrCodeDiv, {
+            text: data,
+            width: 400,
+            height: 400,
+        });
+
+        // Convert QR code to a blob and share it
+        setTimeout(() => {
+            const canvas = qrCodeDiv.querySelector('canvas');
+            canvas.toBlob((blob) => {
+                if (navigator.share && blob) {
+                    const filesArray = [
+                        new File([blob], 'qr-code.png', { type: 'image/png' })
+                    ];
+                    navigator.share({
+                        title: 'QR Code',
+                        text: 'Here is a QR code',
+                        files: filesArray,
+                    }).catch((error) => console.log('Error sharing', error));
+                } else {
+                    alert('Sharing not supported on this browser.');
+                }
+            });
+        }, 100); // Timeout to ensure the QR code is generated
     };
 
     // Close the modal

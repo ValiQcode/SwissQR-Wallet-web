@@ -36,23 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadQRCodes();
     };
 
-    // Generate QR code
-    generateQrBtn.addEventListener('click', () => {
-        const data = qrInput.value.trim();
-        if (data) {
-            qrCanvas.innerHTML = ""; // Clear the previous QR code
-
-            new QRCode(qrCanvas, { // Create a new QRCode object
-                text: data,
-                width: 200,
-                height: 200,
-            });
-
-            saveQRCode(data);
-            qrInput.value = '';
-        }
-    });
-
     // Show QR code in modal
     const showQRCodeInModal = (data) => {
         modal.style.display = "flex";

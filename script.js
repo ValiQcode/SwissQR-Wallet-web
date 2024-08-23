@@ -38,12 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show QR code in modal
     const showQRCodeInModal = (data) => {
+        const screenWidth = window.innerWidth;
+        const qrSize = Math.min(screenWidth * 0.8, 400); // Adjust size based on screen width
         modal.style.display = "flex";
         modalCanvas.innerHTML = ""; // Clear the previous QR code in modal
         new QRCode(modalCanvas, {
             text: data,
-            width: 400,
-            height: 400,
+            width: qrSize,
+            height: qrSize,
         });
     };
 
